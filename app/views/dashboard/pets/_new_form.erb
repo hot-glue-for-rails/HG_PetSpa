@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "pet-new" do %>
+<h3>
+  New PET
+  </h3>
+  <%= form_with model:  pet, url: dashboard_pets_path, method: :post do  |f| %>
+    <%=  render partial: "dashboard/pets/form",
+      locals: { pet: pet, f: f} %>
+  <% end %>
+<% end %>

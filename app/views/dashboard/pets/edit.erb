@@ -1,0 +1,20 @@
+<%= link_to "<i class='fa fa-arrow-circle-left  2x'></i> Back to list".html_safe, dashboard_pets_path %>
+
+<%= turbo_frame_tag "pet__#{@pet.id}" do  %>
+
+  <div class="cell editable" style="position: relative;">
+
+    <% if @pet.errors.any? %>
+      <%= render(partial: "dashboard/errors", locals: {resource: @pet }) %>
+    <% end %>
+
+    <h2>Editing <%= @pet.name %></h2>
+    <%= form_with model: @pet, url: dashboard_pet_path(@pet) do |f| %>
+    <%=  render partial: "form",  locals: {:pet => @pet, f: f} %>
+    <% end %>
+
+  </div>
+
+<% end %>
+
+

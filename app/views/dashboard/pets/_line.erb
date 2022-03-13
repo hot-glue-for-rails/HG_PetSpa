@@ -1,0 +1,11 @@
+
+<%= turbo_frame_tag "pet__#{ pet.id }" do  %>
+  <div class='row scaffold-row' data-id='<%= pet.id %>' data-edit='false'>
+    <%= render partial: 'dashboard/pets/show', locals: { pet: pet } %>
+
+  </div>
+<% end %>
+
+
+
+
