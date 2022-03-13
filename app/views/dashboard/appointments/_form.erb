@@ -8,7 +8,7 @@
   </div>
   <div class='col-md-1' >  
     <span class='<%= "alert-danger" if appointment.errors.details.keys.include?(:pet) %>'  style="display: inherit;"  >
-        <%= f.collection_select(:pet_id, Pet.all, :id, :name, {prompt: true, selected: @appointment.pet_id }, class: 'form-control') %>
+        <%= f.collection_select(:pet_id, current_human.pets, :id, :name, {prompt: true, selected: @appointment.pet_id }, class: 'form-control') %>
       
       <label class='small form-text text-muted'>Pet</label>
     </span>
