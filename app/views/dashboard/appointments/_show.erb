@@ -1,0 +1,23 @@
+<div class='col-md-1'><% unless appointment.when_at.nil? %>
+  <%= appointment.when_at.in_time_zone(current_timezone).strftime('%m/%d/%Y @ %l:%M %p ') + timezonize(current_timezone) %>
+  <% else %>
+  <span class='alert-danger'>MISSING</span>
+  <% end %></div>
+<div class='col-md-1'><%= appointment.pet.try(:name) || '<span class="content alert-danger">MISSING</span>'.html_safe %></div>
+
+
+
+
+<div class=" scaffold-line-buttons  col-md-2" >
+  
+
+  
+    <%= form_with url: dashboard_appointment_path(appointment), html: {data: {'turbo-confirm': "Are you sure you want to delete #{ appointment.name }?"}, style: "display: inline-block;"}, method: :delete do |f| %>
+      <%= f.submit "Delete".html_safe,  class: "delete-appointment-button btn btn-primary btn-sm" %>
+    <% end %>
+  
+
+  
+  <%= link_to "Edit <i class='fa fa-1x fa-list-alt'></i>".html_safe, edit_dashboard_appointment_path(appointment), disable_with: "Loading...", class: "edit-appointment-button btn btn-primary btn-sm" %>
+  
+</div>

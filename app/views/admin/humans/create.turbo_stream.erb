@@ -1,0 +1,18 @@
+<% if @human.errors.none? %>
+  <%= turbo_stream.replace "humans-list" + "" do %>
+  <%= render partial: "list", locals: {humans: @humans} %>
+  <% end %>
+  <% end %>
+  <%= turbo_stream.replace "human-new" do %>
+  <% if @human.errors.none? %>
+  <%= render partial: "new_button", locals: {} %>
+  <% else %>
+  <%= render partial: "new_form", locals: {human: @human} %>
+  <% end %>
+  <% end %>
+  <%= turbo_stream.replace "flash_notices" do %>
+  <%= render partial: "layouts/flash_notices" %>
+  <% if @human.errors.any? %>
+  <%= render partial: "errors", locals: {resource: @human} %>
+  <% end %>
+<% end %>

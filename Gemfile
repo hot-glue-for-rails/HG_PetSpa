@@ -78,3 +78,5 @@ group :test do
 end
 gem 'devise', branch: 'main', git: 'https://github.com/heartcombo/devise.git'
 gem 'hot-glue', path: "/Users/jason/Work/Hot_Glue/hot-glue-private"
+
+gem 'byebug'

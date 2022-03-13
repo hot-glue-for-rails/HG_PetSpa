@@ -1,0 +1,22 @@
+<div class="row">
+  <div class='col-md-1' >  
+    <span class='<%= "alert-danger" if appointment.errors.details.keys.include?(:when_at) %>'  style="display: inherit;"  >
+      <%= datetime_field_localized(f, :when_at, appointment.when_at, 'When at', nil) %>
+      <label class='small form-text text-muted'>When at</label>
+    </span>
+    <br />
+  </div>
+  <div class='col-md-1' >  
+    <span class='<%= "alert-danger" if appointment.errors.details.keys.include?(:pet) %>'  style="display: inherit;"  >
+        <%= f.collection_select(:pet_id, Pet.all, :id, :name, {prompt: true, selected: @appointment.pet_id }, class: 'form-control') %>
+      
+      <label class='small form-text text-muted'>Pet</label>
+    </span>
+    <br />
+  </div>
+
+  <div class="col-md-2">
+    <%= link_to "Cancel", dashboard_appointments_path,  {class: "btn btn-secondary"} %>
+    <%= f.submit "Save", class: "btn btn-primary pull-right" %>
+  </div>
+</div>

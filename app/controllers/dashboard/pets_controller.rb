@@ -9,12 +9,12 @@ class Dashboard::PetsController < Dashboard::BaseController
  
 
   def load_pet
-    @pet = (human.pets.find(params[:id]))
+    @pet = (current_human.pets.find(params[:id]))
   end
   
 
   def load_all_pets 
-    @pets = ( human.pets.page(params[:page]))  
+    @pets = ( current_human.pets.page(params[:page]))  
   end
 
   def index
@@ -26,7 +26,7 @@ class Dashboard::PetsController < Dashboard::BaseController
 
   def new
     
-    @pet = Pet.new(human: human)
+    @pet = Pet.new(human: current_human)
    
     respond_to do |format|
       format.html
@@ -34,7 +34,7 @@ class Dashboard::PetsController < Dashboard::BaseController
   end
 
   def create
-    modified_params = modify_date_inputs_on_params(pet_params.dup.merge!( human: human) )
+    modified_params = modify_date_inputs_on_params(pet_params.dup.merge!( human: current_human) )
 
 
     @pet = Pet.create(modified_params)
@@ -70,7 +70,7 @@ class Dashboard::PetsController < Dashboard::BaseController
 
   def update
 
-    if @pet.update(modify_date_inputs_on_params(pet_params, human))
+    if @pet.update(modify_date_inputs_on_params(pet_params, current_human))
       flash[:notice] = (flash[:notice] || "") << "Saved #{@pet.name}"
     else
       flash[:alert] = (flash[:alert] || "") << "Pet could not be saved."

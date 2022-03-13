@@ -2,14 +2,14 @@ require 'rails_helper'
 
 describe "interaction for Dashboard::PetsController", type: :feature do
   include HotGlue::ControllerHelper
-    #HOTGLUE-SAVESTART
+  #HOTGLUE-SAVESTART
   #HOTGLUE-END
-  let(:human) {create(:human)}
+  let(:current_human) {create(:human)}
   
-  let!(:pet1) {create(:pet, human: human , name: FFaker::Movie.title )}
+  let!(:pet1) {create(:pet, human: current_human , name: FFaker::Movie.title )}
    
   before(:each) do
-    login_as(human)
+    login_as(current_human)
   end 
 
   describe "index" do

@@ -1,0 +1,18 @@
+<div class='col-md-2'><%= pet.name %></div>
+
+
+
+
+<div class=" scaffold-line-buttons  col-md-2" >
+  
+
+  
+    <%= form_with url: admin_human_pet_path(human,pet), html: {data: {'turbo-confirm': "Are you sure you want to delete #{ pet.name }?"}, style: "display: inline-block;"}, method: :delete do |f| %>
+      <%= f.submit "Delete".html_safe,  class: "delete-pet-button btn btn-primary btn-sm" %>
+    <% end %>
+  
+
+  
+  <%= link_to "Edit <i class='fa fa-1x fa-list-alt'></i>".html_safe, edit_admin_human_pet_path(human,pet), disable_with: "Loading...", class: "edit-pet-button btn btn-primary btn-sm" %>
+  
+</div>

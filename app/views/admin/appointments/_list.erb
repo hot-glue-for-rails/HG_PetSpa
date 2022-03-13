@@ -1,0 +1,40 @@
+<%= turbo_frame_tag "appointments-list"   do %>
+  <div class="container-fluid scaffold-list">
+    
+      <h4>
+        APPOINTMENTS
+      </h4>
+    
+
+    <%= render partial: "admin/appointments/new_button", locals: {} %><br />
+
+    
+      
+        <div class="row scaffold-heading-row">
+          <div class='col-md-2'>When at</div>
+<div class='col-md-2'>Pet</div>
+          
+
+          
+
+          <div class=' scaffold-col-heading scaffold-col-heading-buttons col-md-2' >
+
+          </div>
+        </div>
+      
+
+      <% if appointments.empty? %>
+    <div>
+        None
+    </div>
+      <% end %>
+      <% appointments.each do |appointment| %>
+        <%= render partial: 'admin/appointments/line', locals: {appointment: appointment}
+            .merge(defined?(nested_for) ? {nested_for: nested_for} : {})
+      
+        %>
+      <% end %>
+    <% if appointments.respond_to?(:total_pages) %><%= paginate(appointments) %> <% end %>
+  
+  </div>
+<% end %>

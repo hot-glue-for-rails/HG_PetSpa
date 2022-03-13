@@ -15,5 +15,11 @@
   <%= render partial: 'layouts/flash_notices' %>
   
     <%= yield %>
+
+
+  <% if current_human %>
+  <hr />
+  <%= button_to  "Log out", destroy_human_session_path, method: :delete %>
+    <% end %>
   </body>
 </html>

@@ -1,0 +1,36 @@
+<div class="row">
+  <div class='col-md-2' >  
+    <span class='<%= "alert-danger" if human.errors.details.keys.include?(:email) %>'  style="display: inherit;"  >
+        <%= f.text_field :email, value: human.email, autocomplete: 'off', size: 40, class: 'form-control', type: '' %>
+       
+      
+      <label class='small form-text text-muted'>Email</label>
+    </span>
+    <br />
+  </div>
+  <div class='col-md-2' >  
+    <span class='<%= "alert-danger" if human.errors.details.keys.include?(:name) %>'  style="display: inherit;"  >
+        <%= f.text_field :name, value: human.name, autocomplete: 'off', size: 40, class: 'form-control', type: '' %>
+       
+      
+      <label class='small form-text text-muted'>Name</label>
+    </span>
+    <br />
+  </div>
+  <div class='col-md-2' >  
+    <span class='<%= "alert-danger" if human.errors.details.keys.include?(:is_admin) %>'  style="display: inherit;"  >
+       <br />  <%= f.radio_button(:is_admin,  '0', checked: human.is_admin  ? '' : 'checked') %>
+        <%= f.label(:is_admin, value: 'No', for: 'human_is_admin_0') %>
+        <%= f.radio_button(:is_admin, '1',  checked: human.is_admin  ? 'checked' : '') %>
+        <%= f.label(:is_admin, value: 'Yes', for: 'human_is_admin_1') %>
+      
+      <label class='small form-text text-muted'>Is admin</label>
+    </span>
+    <br />
+  </div>
+
+  <div class="col-md-2">
+    <%= link_to "Cancel", admin_humans_path,  {class: "btn btn-secondary"} %>
+    <%= f.submit "Save", class: "btn btn-primary pull-right" %>
+  </div>
+</div>

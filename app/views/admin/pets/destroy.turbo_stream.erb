@@ -1,0 +1,3 @@
+<%= turbo_stream.replace "pets-list" + ((("__human-#{@human.id}") if @human) || "") do %>
+  <%= render partial: "list", locals: {pets: @pets }.merge(@human ? {nested_for: "human-#{@human.id}", human: @human} : {}) %>
+<% end %>

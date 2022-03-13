@@ -1,0 +1,11 @@
+
+<%= turbo_frame_tag "pet__#{ pet.id }" do  %>
+  <div class='row scaffold-row' data-id='<%= pet.id %>' data-edit='false'>
+    <%= render partial: 'admin/pets/show', locals: { pet: pet }.merge(defined?(human) ? {human: human, nested_for: "human-#{human.id}"} : {}) %>
+
+  </div>
+<% end %>
+
+
+
+

@@ -1,6 +1,6 @@
 def login_as(user)
-  visit '/users/sign_in'
-  within("#new_account") do
+  visit '/human/sign_in'
+  within("#new_human") do
     fill_in 'Email', with: user.email
     fill_in 'Password', with: 'password'
   end

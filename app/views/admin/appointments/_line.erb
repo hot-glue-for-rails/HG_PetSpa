@@ -1,0 +1,11 @@
+
+<%= turbo_frame_tag "appointment__#{ appointment.id }" do  %>
+  <div class='row scaffold-row' data-id='<%= appointment.id %>' data-edit='false'>
+    <%= render partial: 'admin/appointments/show', locals: { appointment: appointment } %>
+
+  </div>
+<% end %>
+
+
+
+

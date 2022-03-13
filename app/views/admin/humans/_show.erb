@@ -1,0 +1,49 @@
+<div class='col-md-2'><%= human.email %></div>
+<div class='col-md-2'><%= human.name %></div>
+<div class='col-md-2'>
+    <% if human.is_admin.nil? %>
+        <span class='alert-danger'>MISSING</span>
+    <% elsif human.is_admin %>
+      YES
+    <% else %>
+      NO
+    <% end %>
+
+  </div>
+
+
+  
+
+  
+
+    
+    
+    
+    
+    
+    <div class=" col-md-4 scaffold-downnest"  >
+  <%= render partial: "admin/pets/list", locals: {
+        human: human,
+        pets: human.pets
+      }
+      .merge({nested_for: "human-#{human.id}"})
+      
+    %>
+  </div>
+  
+
+
+
+<div class=" scaffold-line-buttons  col-md-2" >
+  
+
+  
+    <%= form_with url: admin_human_path(human), html: {data: {'turbo-confirm': "Are you sure you want to delete #{ human.name }?"}, style: "display: inline-block;"}, method: :delete do |f| %>
+      <%= f.submit "Delete".html_safe,  class: "delete-human-button btn btn-primary btn-sm" %>
+    <% end %>
+  
+
+  
+  <%= link_to "Edit <i class='fa fa-1x fa-list-alt'></i>".html_safe, edit_admin_human_path(human), disable_with: "Loading...", class: "edit-human-button btn btn-primary btn-sm" %>
+  
+</div>

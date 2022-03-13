@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "pet-new" do %>
+<h3>
+  New PET
+  </h3>
+  <%= form_with model:  pet, url: admin_human_pets_path(human), method: :post do  |f| %>
+    <%=  render partial: "admin/pets/form",
+      locals: { pet: pet, f: f}.merge(defined?(human) ? {human: human}: {}) %>
+  <% end %>
+<% end %>

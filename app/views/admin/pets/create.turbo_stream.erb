@@ -1,0 +1,18 @@
+<% if @pet.errors.none? %>
+  <%= turbo_stream.replace "pets-list" + ((("__human-#{@human.id}") if @human) || "") do %>
+  <%= render partial: "list", locals: {pets: @pets}.merge(@human ? {nested_for: "human-#{@human.id}", human: @human} : {}) %>
+  <% end %>
+  <% end %>
+  <%= turbo_stream.replace "pet-new" do %>
+  <% if @pet.errors.none? %>
+  <%= render partial: "new_button", locals: {}.merge(@human ? {human: @human} : {}) %>
+  <% else %>
+  <%= render partial: "new_form", locals: {pet: @pet}.merge(@human ? {human: @human} : {}) %>
+  <% end %>
+  <% end %>
+  <%= turbo_stream.replace "flash_notices" do %>
+  <%= render partial: "layouts/flash_notices" %>
+  <% if @pet.errors.any? %>
+  <%= render partial: "errors", locals: {resource: @pet} %>
+  <% end %>
+<% end %>

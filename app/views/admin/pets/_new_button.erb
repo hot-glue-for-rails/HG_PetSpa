@@ -1,0 +1,5 @@
+<%= turbo_frame_tag "pet-new" do %>
+  <div>
+    <%= link_to "New PET",  new_admin_human_pet_path(human), disable_with: "Loading...", class: "new-pet-button btn btn-primary pull-right btn-sm " %>
+  </div>
+<% end %>

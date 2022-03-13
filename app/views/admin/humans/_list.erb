@@ -1,0 +1,52 @@
+<%= turbo_frame_tag "humans-list"   do %>
+  <div class="container-fluid scaffold-list">
+    
+      <h4>
+        HUMANS
+      </h4>
+    
+
+    <%= render partial: "admin/humans/new_button", locals: {} %><br />
+
+    
+      
+        <div class="row scaffold-heading-row">
+          <div class='col-md-2'>Email</div>
+<div class='col-md-2'>Name</div>
+<div class='col-md-2'>Is admin</div>
+          
+            
+            
+
+            
+              <div class=" scaffold-col-heading col-sm-4" >
+                <strong>
+                  Pets
+                </strong>
+              </div>
+            
+          
+
+          
+
+          <div class=' scaffold-col-heading scaffold-col-heading-buttons col-md-2' >
+
+          </div>
+        </div>
+      
+
+      <% if humans.empty? %>
+    <div>
+        None
+    </div>
+      <% end %>
+      <% humans.each do |human| %>
+        <%= render partial: 'admin/humans/line', locals: {human: human}
+            .merge(defined?(nested_for) ? {nested_for: nested_for} : {})
+      
+        %>
+      <% end %>
+    <% if humans.respond_to?(:total_pages) %><%= paginate(humans) %> <% end %>
+  
+  </div>
+<% end %>

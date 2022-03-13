@@ -1,0 +1,35 @@
+<%= turbo_frame_tag "pets-list" + ((('__' + nested_for) if defined?(nested_for)) || "")  do %>
+  <div class="container-fluid scaffold-list">
+    
+
+    <%= render partial: "admin/pets/new_button", locals: {}.merge(defined?(human) ? {human: human} : {}) %><br />
+
+    
+      
+        <div class="row scaffold-heading-row">
+          <div class='col-md-2'>Name</div>
+          
+
+          
+
+          <div class=' scaffold-col-heading scaffold-col-heading-buttons col-md-2' >
+
+          </div>
+        </div>
+      
+
+      <% if pets.empty? %>
+    <div>
+        None
+    </div>
+      <% end %>
+      <% pets.each do |pet| %>
+        <%= render partial: 'admin/pets/line', locals: {pet: pet}
+            .merge(defined?(nested_for) ? {nested_for: nested_for} : {})
+            .merge(defined?(human) ? {human: human} : {})
+        %>
+      <% end %>
+    <% if pets.respond_to?(:total_pages) %><%= paginate(pets) %> <% end %>
+  
+  </div>
+<% end %>

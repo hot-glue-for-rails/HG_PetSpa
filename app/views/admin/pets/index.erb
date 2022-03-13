@@ -1,0 +1,12 @@
+
+
+<div class="container-fluid">
+  <div class="row"> <div class="col-md-12">
+  
+
+  <div class="clearfix"></div>
+  <%= render partial: 'admin/pets/list',
+    locals: {pets: @pets}.merge(@human ? {nested_for: "human-#{@human.id}", human: @human} : {}) %>
+
+  </div></div>
+</div>

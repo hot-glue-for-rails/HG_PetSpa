@@ -1,0 +1,9 @@
+<%= turbo_frame_tag "appointment-new" do %>
+<h3>
+  New APPOINTMENT
+  </h3>
+  <%= form_with model:  appointment, url: dashboard_appointments_path, method: :post do  |f| %>
+    <%=  render partial: "dashboard/appointments/form",
+      locals: { appointment: appointment, f: f} %>
+  <% end %>
+<% end %>
