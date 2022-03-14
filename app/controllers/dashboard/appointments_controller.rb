@@ -73,10 +73,7 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
 
   def update
     if @appointment.update(modify_date_inputs_on_params(
-                             hawk_params(
-                               {:pet_id => [current_human, "pets"]}, appointment_params) ,
-                             current_human
-                           )
+                             hawk_params({:pet_id => [current_human, "pets"]}, appointment_params), current_human)
     )
       flash[:notice] = (flash[:notice] || "") << "Saved #{@appointment.name}"
       if !@hawk_alarm.empty?
