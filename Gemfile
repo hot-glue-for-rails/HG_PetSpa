@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby "2.7.5"
+ruby "3.1.1"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.2", ">= 7.0.2.3"
@@ -80,3 +80,5 @@ gem 'devise', branch: 'main', git: 'https://github.com/heartcombo/devise.git'
 gem 'hot-glue', path: "/Users/jason/Work/Hot_Glue/hot-glue-private"
 
 gem 'byebug'
+
+gem 'bcrypt', '~>3.1.16'

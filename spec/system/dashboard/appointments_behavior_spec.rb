@@ -5,7 +5,7 @@ describe "interaction for Dashboard::AppointmentsController", type: :feature do
   #HOTGLUE-SAVESTART
   #HOTGLUE-END
   let(:current_human) {create(:human)}
-  let!(:pet1) {create(:pet)}
+  let!(:pet1) {create(:pet, human: current_human)}
   let!(:appointment1) {create(:appointment, human: current_human , when_at: DateTime.current + rand(1000).seconds, 
       pet: pet1 )}
    

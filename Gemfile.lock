@@ -277,8 +277,10 @@ GEM
 
 PLATFORMS
   arm64-darwin-20
+  arm64-darwin-21
 
 DEPENDENCIES
+  bcrypt (~> 3.1.16)
   bootsnap
   byebug
   capybara
@@ -304,7 +306,7 @@ DEPENDENCIES
   webdrivers
 
 RUBY VERSION
-   ruby 2.7.5p203
+   ruby 3.1.1p18
 
 BUNDLED WITH
    2.2.11
