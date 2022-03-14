@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe "interaction for Dashboard::AppointmentsController", type: :feature do
   include HotGlue::ControllerHelper
-    #HOTGLUE-SAVESTART
+  #HOTGLUE-SAVESTART
   #HOTGLUE-END
   let(:current_human) {create(:human)}
   let!(:pet1) {create(:pet)}
