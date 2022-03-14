@@ -25,16 +25,19 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
 
   def new
     
-    @appointment = Appointment.new(human: current_human)
+    @appointment = Appointment.new
    
     respond_to do |format|
       format.html
     end
   end
 
-  def create
-    modified_params = modify_date_inputs_on_params(appointment_params.dup.merge!( human: current_human) )
 
+
+  def create
+    modified_params = modify_date_inputs_on_params(
+      hawk_params({:pet_id => [current_human, "pets"]}, appointment_params.dup)
+    )
 
     @appointment = Appointment.create(modified_params)
 
@@ -46,7 +49,8 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
         format.html { redirect_to dashboard_appointments_path }
       end
     else
-      flash[:alert] = "Oops, your appointment could not be created."
+      flash[:alert] ||= ""
+      flash[:alert] = "Oops, your appointment could not be created. #{@hawk_alarm}"
       respond_to do |format|
         format.turbo_stream
         format.html
@@ -68,12 +72,18 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
   end
 
   def update
-
-    if @appointment.update(modify_date_inputs_on_params(appointment_params, current_human))
+    if @appointment.update(modify_date_inputs_on_params(
+                             hawk_params(
+                               {:pet_id => [current_human, "pets"]}, appointment_params) ,
+                             current_human
+                           )
+    )
       flash[:notice] = (flash[:notice] || "") << "Saved #{@appointment.name}"
+      if !@hawk_alarm.empty?
+        flash[:alert] = @hawk_alarm
+      end
     else
-      flash[:alert] = (flash[:alert] || "") << "Appointment could not be saved."
-
+      flash[:alert] = (flash[:alert] || "") << "Appointment could not be saved. #{@hawk_alarm}"
     end
 
     respond_to do |format|

@@ -34,6 +34,7 @@ class Dashboard::PetsController < Dashboard::BaseController
   end
 
   def create
+
     modified_params = modify_date_inputs_on_params(pet_params.dup.merge!( human: current_human) )
 
 

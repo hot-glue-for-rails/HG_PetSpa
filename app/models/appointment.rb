@@ -1,10 +1,10 @@
 class Appointment < ApplicationRecord
 
-  belongs_to :pet
+  belongs_to :pet, optional: false
 
   has_one :human, through: :pet
 
   def name
-    "for #{pet.name} @ #{when_at}"
+    "for #{pet.try(:name)} @ #{when_at}"
   end
 end
