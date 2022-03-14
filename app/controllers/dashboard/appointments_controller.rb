@@ -25,19 +25,17 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
 
   def new
     
-    @appointment = Appointment.new
+    @appointment = Appointment.new()
+
    
     respond_to do |format|
       format.html
     end
   end
 
-
-
   def create
-    modified_params = modify_date_inputs_on_params(
-      hawk_params({:pet_id => [current_human, "pets"]}, appointment_params.dup)
-    )
+    modified_params = modify_date_inputs_on_params(appointment_params.dup.merge!( human: current_human) )
+    modified_params = hawk_params( {pet_id: [current_human, "pets"] }, modified_params) 
 
     @appointment = Appointment.create(modified_params)
 
@@ -49,7 +47,6 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
         format.html { redirect_to dashboard_appointments_path }
       end
     else
-      flash[:alert] ||= ""
       flash[:alert] = "Oops, your appointment could not be created. #{@hawk_alarm}"
       respond_to do |format|
         format.turbo_stream
@@ -72,15 +69,15 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
   end
 
   def update
-    if @appointment.update(modify_date_inputs_on_params(
-                             hawk_params({:pet_id => [current_human, "pets"]}, appointment_params), current_human)
-    )
+    modified_params = modify_date_inputs_on_params(appointment_params, current_human)
+    modified_params = hawk_params( {pet_id: [current_human, "pets"] }, modified_params) 
+      
+    if @appointment.update(modified_params)
       flash[:notice] = (flash[:notice] || "") << "Saved #{@appointment.name}"
-      if !@hawk_alarm.empty?
-        flash[:alert] = @hawk_alarm
-      end
+      flash[:alert] = @hawk_alarm  if !@hawk_alarm.empty?
     else
       flash[:alert] = (flash[:alert] || "") << "Appointment could not be saved. #{@hawk_alarm}"
+
     end
 
     respond_to do |format|
@@ -93,7 +90,7 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
     begin
       @appointment.destroy
     rescue StandardError => e
-      flash[:alert] = "Appointment could not be deleted"
+      flash[:alert] = "Appointment could not be deleted."
     end
     load_all_appointments
     respond_to do |format|
@@ -104,10 +101,6 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
 
   def appointment_params
     params.require(:appointment).permit( [:when_at, :pet_id] )
-  end
-
-  def default_colspan
-    2
   end
 
   def namespace

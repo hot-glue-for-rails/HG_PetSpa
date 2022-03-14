@@ -7,7 +7,6 @@ class Dashboard::PetsController < Dashboard::BaseController
   before_action :load_pet, only: [:show, :edit, :update, :destroy]
   after_action -> { flash.discard }, if: -> { request.format.symbol ==  :turbo_stream }
  
-
   def load_pet
     @pet = (current_human.pets.find(params[:id]))
   end
@@ -27,6 +26,7 @@ class Dashboard::PetsController < Dashboard::BaseController
   def new
     
     @pet = Pet.new(human: current_human)
+
    
     respond_to do |format|
       format.html
@@ -34,7 +34,6 @@ class Dashboard::PetsController < Dashboard::BaseController
   end
 
   def create
-
     modified_params = modify_date_inputs_on_params(pet_params.dup.merge!( human: current_human) )
 
 
@@ -99,10 +98,6 @@ class Dashboard::PetsController < Dashboard::BaseController
 
   def pet_params
     params.require(:pet).permit( [:name] )
-  end
-
-  def default_colspan
-    1
   end
 
   def namespace
