@@ -1,5 +1,5 @@
 <div class="row">
-  <div class='col-md-2' >  
+  <div class='col-md-10' >
     <span class='<%= "alert-danger" if pet.errors.details.keys.include?(:name) %>'  style="display: inherit;"  >
         <%= f.text_field :name, value: pet.name, autocomplete: 'off', size: 40, class: 'form-control', type: '' %>
        

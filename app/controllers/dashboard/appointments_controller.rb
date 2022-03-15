@@ -34,7 +34,7 @@ class Dashboard::AppointmentsController < Dashboard::BaseController
   end
 
   def create
-    modified_params = modify_date_inputs_on_params(appointment_params.dup.merge!( human: current_human) )
+    modified_params = modify_date_inputs_on_params(appointment_params.dup)
     modified_params = hawk_params( {pet_id: [current_human, "pets"] }, modified_params) 
 
     @appointment = Appointment.create(modified_params)

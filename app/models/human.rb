@@ -1,12 +1,9 @@
 class Human < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :pets
+  has_many :pets, dependent: :destroy
   has_many :appointments, through: :pets
-
 
   before_validation :check_if_missing_password!
 
@@ -17,6 +14,4 @@ class Human < ApplicationRecord
       self.password_confirmation = new_password
     end
   end
-
-
 end

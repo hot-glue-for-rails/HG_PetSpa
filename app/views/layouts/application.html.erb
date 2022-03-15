@@ -18,7 +18,9 @@
 
 
   <% if current_human %>
+  <br /><br /><br /><br />
   <hr />
+    <em>You are logged in as <%= current_human.email %></em>
   <%= button_to  "Log out", destroy_human_session_path, method: :delete %>
     <% end %>
   </body>
